@@ -1,4 +1,18 @@
 #!/usr/bin/make -f
 
+export GEM2DEB_TEST_RUNNER = --check-dependencies
+export DH_RUBY = --gem-install
+
 %:
-	dh $@
+	dh $@ --buildsystem=ruby --with ruby
+
+override_dh_auto_clean:
+	DH_RUBY_GEMSPEC=/dev/null dh_auto_clean
+
+override_dh_install-indep:
+	dh_install
+	find debian/*/usr/share/doc/ruby-rmagick-doc/ \
+		-name .cvsignore -delete
+	find debian/*/usr/share/doc/ruby-rmagick-doc/ \
+		-type f -executable -exec \
+		chmod -x '{}' ';'

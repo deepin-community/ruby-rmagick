@@ -1,0 +1,42 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sat, 21 Oct 2023 19:02:37 +0000
+Subject: Do not run GC test before 3.2
+
+Avoid a FTBFS on PPC
+
+bug: https://bugs.ruby-lang.org/issues/18779
+---
+ spec/spec_helper.rb | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/spec/spec_helper.rb b/spec/spec_helper.rb
+index 36c0de3..2a10138 100644
+--- a/spec/spec_helper.rb
++++ b/spec/spec_helper.rb
+@@ -34,15 +34,17 @@ RSpec.configure do |config|
+   config.include(TestHelpers)
+ end
+ 
+-if GC.respond_to?(:verify_compaction_references)
+-  at_exit do
+-    # Verify to move objects around, helping to find GC compaction bugs.
+-    # Run last, because it may consider more effective if the object
+-    # has been generated to some extent.
+-    if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0')
+-      GC.verify_compaction_references(expand_heap: true, toward: :empty)
+-    else
+-      GC.verify_compaction_references(double_heap: true, toward: :empty)
++if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0')
++  if GC.respond_to?(:verify_compaction_references)
++    at_exit do
++      # Verify to move objects around, helping to find GC compaction bugs.
++      # Run last, because it may consider more effective if the object
++      # has been generated to some extent.
++      if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0')
++        GC.verify_compaction_references(expand_heap: true, toward: :empty)
++      else
++        GC.verify_compaction_references(double_heap: true, toward: :empty)
++      end
+     end
+   end
+ end

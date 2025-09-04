@@ -1,0 +1,24 @@
+From: Chris Lamb <lamby@debian.org>
+Date: Tue, 16 Aug 2016 11:08:42 -0300
+Subject: Use deterministic label for image
+
+this helps making the build reproducible
+
+Signed-off-by: Antonio Terceiro <terceiro@debian.org>
+---
+ doc/ex/polaroid.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/ex/polaroid.rb b/doc/ex/polaroid.rb
+index f35901e..6faf1ed 100644
+--- a/doc/ex/polaroid.rb
++++ b/doc/ex/polaroid.rb
+@@ -4,7 +4,7 @@ require 'date'
+ # Demonstrate the Image#polaroid method
+ 
+ img = Magick::Image.read('images/Flower_Hat.jpg').first
+-img[:Caption] = "\nLosha\n" + Date.today.to_s
++img[:Caption] = "\nLosha\nPlus hat"
+ 
+ begin
+   picture = img.polaroid do |options|
