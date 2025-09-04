@@ -1,15 +1,49 @@
-Source: template-repository
-Section: unknown
+Source: ruby-rmagick
+Section: ruby
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Lucas Kanashiro <kanashiro@debian.org>,
+           Marc Dequènes (Duck) <Duck@DuckCorp.org>,
+	   Bastien Roucariès <rouca@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               gem2deb,
+               ghostscript,
+               gsfonts,
+               libmagickcore-dev (>= 8:6.7.7),
+               libmagickwand-dev (>= 8:6.7.7),
+               libwmf-bin,
+               pry,
+               rake,
+               ruby-rspec,
+               ruby-simplecov,
+	       ruby-pkg-config
+Standards-Version: 4.7.0
+Vcs-Git: https://salsa.debian.org/ruby-team/ruby-rmagick.git
+Vcs-Browser: https://salsa.debian.org/ruby-team/ruby-rmagick
+Homepage: https://github.com/rmagick/rmagick
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
 
-Package: template-repository
+Package: ruby-rmagick
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Ruby-Versions: ${ruby:Versions}
+Depends: ${misc:Depends},
+         ${ruby:Depends},
+         ${shlibs:Depends}
+Multi-Arch: same
+Description: ImageMagick API for Ruby
+ RMagick is an interface between the Ruby programming language and the
+ ImageMagick image processing library.
+
+Package: ruby-rmagick-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: doc-base
+Multi-Arch: foreign
+Description: ImageMagick API for Ruby (documentation)
+ RMagick is an interface between the Ruby programming language and the
+ ImageMagick image processing library.
+ .
+ This package contains the documentation and some example scripts.

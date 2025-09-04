@@ -1,0 +1,7 @@
+0001-Bypass-version-check.patch
+0002-Use-deterministic-label-for-image.patch
+0003-Seed-RNG-to-0-during-builds.patch
+0004-gemspec-drop-git-usage.patch
+0006-spec-skip-failing-tests.patch
+0006-Set-rpath-empty.patch
+0007-Do-not-run-GC-test-before-3.2.patch

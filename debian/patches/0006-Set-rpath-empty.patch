@@ -1,0 +1,22 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sat, 21 Oct 2023 16:03:17 +0000
+Subject: Set rpath empty
+
+forwarded: not-needed
+---
+ ext/RMagick/extconf.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ext/RMagick/extconf.rb b/ext/RMagick/extconf.rb
+index 6940f0e..918067e 100644
+--- a/ext/RMagick/extconf.rb
++++ b/ext/RMagick/extconf.rb
+@@ -115,7 +115,7 @@ module RMagick
+ 
+         libdir  = PKGConfig.libs_only_L($magick_package).chomp.sub('-L', '')
+         ldflags = "#{ENV['LDFLAGS']} " + PKGConfig.libs($magick_package).chomp
+-        rpath   = libdir.empty? ? '' : "-Wl,-rpath,#{libdir}"
++        rpath   = ''
+ 
+         # Save flags
+         $CPPFLAGS   += " #{ENV['CPPFLAGS']} " + PKGConfig.cflags($magick_package).chomp

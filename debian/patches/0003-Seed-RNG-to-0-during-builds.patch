@@ -1,0 +1,28 @@
+From: Antonio Terceiro <terceiro@debian.org>
+Date: Tue, 16 Aug 2016 11:13:12 -0300
+Subject: Seed RNG to 0 during builds
+
+This helps making the build reproducible
+---
+ ext/RMagick/rmmain.cpp | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/ext/RMagick/rmmain.cpp b/ext/RMagick/rmmain.cpp
+index 2675b3e..b291ae9 100644
+--- a/ext/RMagick/rmmain.cpp
++++ b/ext/RMagick/rmmain.cpp
+@@ -1802,6 +1802,14 @@ Init_RMagick2(void)
+     SetFatalErrorHandler(rm_fatal_error_handler);
+     SetErrorHandler(rm_error_handler);
+     SetWarningHandler(rm_warning_handler);
++
++    if (getenv("SOURCE_DATE_EPOCH") != NULL) {
++#if defined(IMAGEMAGICK_7)
++        SetRandomSecretKey(0);
++#else
++        SeedPseudoRandomGenerator(0);
++#endif
++    }
+ }
+ 
+ 

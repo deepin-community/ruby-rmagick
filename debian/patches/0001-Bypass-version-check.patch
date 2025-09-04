@@ -1,0 +1,18 @@
+From: Antonio Terceiro <terceiro@debian.org>
+Date: Tue, 25 Aug 2015 18:32:00 -0300
+Subject: Bypass version check
+
+This is what SONAMEs are for.
+---
+ lib/rmagick.rb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/rmagick.rb b/lib/rmagick.rb
+index c5eeb08..28e0bef 100644
+--- a/lib/rmagick.rb
++++ b/lib/rmagick.rb
+@@ -1,3 +1,4 @@
++RMAGICK_BYPASS_VERSION_TEST = true
+ # frozen_string_literal: true
+ 
+ require 'rmagick_internal'
