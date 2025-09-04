@@ -1,0 +1,13 @@
+Document: ruby-rmagick-doc
+Title: Debian ruby-rmagick Manual
+Author: Timothy P. Hunter
+Abstract: interface between Ruby and ImageMagick
+ RMagick is an interface between the Ruby programming language and the
+ ImageMagick image processing library.
+ .
+ This document is presenting the API of the Ruby bindings.
+Section: Programming/Ruby
+
+Format: HTML
+Index: /usr/share/doc/ruby-rmagick-doc/html/index.html
+Files: /usr/share/doc/ruby-rmagick-doc/html/*

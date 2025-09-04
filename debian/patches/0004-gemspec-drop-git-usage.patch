@@ -1,0 +1,21 @@
+From: Antonio Terceiro <terceiro@debian.org>
+Date: Sat, 3 Dec 2016 19:10:09 -0200
+Subject: gemspec: drop git usage
+
+---
+ rmagick.gemspec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rmagick.gemspec b/rmagick.gemspec
+index 73eacc2..99e2bb9 100644
+--- a/rmagick.gemspec
++++ b/rmagick.gemspec
+@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
+   s.metadata['documentation_uri'] = 'https://rmagick.github.io/'
+   s.metadata['changelog_uri'] = 'https://github.com/rmagick/rmagick/blob/main/CHANGELOG.md'
+ 
+-  tracked_files = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
++  tracked_files = Dir['**/*'] - Dir['debian/**/*']
+   file_exclusion_regex = /\A(doc|benchmarks|examples|spec|Steepfile)/
+   files = tracked_files.reject { |file| file[file_exclusion_regex] }
+ 
